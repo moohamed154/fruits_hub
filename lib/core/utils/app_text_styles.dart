@@ -20,7 +20,6 @@ abstract class TextStyles {
     return TextStyle(
       fontSize: getResponsiveFontSize(context, fontSize: 13),
       fontWeight: FontWeight.normal,
-      color: Color(0xFF949D9E),
     );
   }
 
@@ -35,7 +34,6 @@ abstract class TextStyles {
     return TextStyle(
       fontSize: getResponsiveFontSize(context, fontSize: 13),
       fontWeight: FontWeight.w600,
-      color: Color(0xFF4E5456),
     );
   }
 
