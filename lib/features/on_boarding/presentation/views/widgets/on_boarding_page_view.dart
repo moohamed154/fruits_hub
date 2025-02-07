@@ -24,17 +24,17 @@ class OnBoardingPageView extends StatelessWidget {
             children: [
               Text(
                 'مرحبًا بك في',
-                style: TextStyles.bold23,
+                style: TextStyles.bold23(context),
               ),
               Text(
                 ' HUB',
-                style: TextStyles.bold23.copyWith(
+                style: TextStyles.bold23(context).copyWith(
                   color: AppColors.secondaryColor,
                 ),
               ),
               Text(
                 'Fruit',
-                style: TextStyles.bold23.copyWith(
+                style: TextStyles.bold23(context).copyWith(
                   color: AppColors.primaryColor,
                 ),
               ),
@@ -52,7 +52,7 @@ class OnBoardingPageView extends StatelessWidget {
             children: [
               Text(
                 'ابحث وتسوق',
-                style: TextStyles.bold23,
+                style: TextStyles.bold23(context),
               ),
             ],
           ),

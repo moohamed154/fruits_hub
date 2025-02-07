@@ -51,10 +51,7 @@ class PageViewItem extends StatelessWidget {
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(16),
-                    child: Text('تخط',
-                        style: TextStyles.regular13.copyWith(
-                          color: Color(0xFF949D9E),
-                        )),
+                    child: Text('تخط', style: TextStyles.regular13(context)),
                   ),
                 ),
               ),
@@ -75,9 +72,7 @@ class PageViewItem extends StatelessWidget {
           child: Text(
             subtitle,
             textAlign: TextAlign.center,
-            style: TextStyles.semiBold13.copyWith(
-              color: Color(0xFF4E5456),
-            ),
+            style: TextStyles.semiBold13(context),
           ),
         ),
       ],
