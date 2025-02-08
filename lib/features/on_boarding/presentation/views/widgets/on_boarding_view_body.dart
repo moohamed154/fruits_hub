@@ -53,9 +53,9 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             activeColor: AppColors.primaryColor,
           ),
         ),
-        // SizedBox(
-        //   height: 29,
-        // ),
+        SizedBox(
+          height: 29,
+        ),
         Visibility(
           visible: currentPag == 1 ? true : false,
           maintainSize: true,

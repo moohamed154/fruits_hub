@@ -24,7 +24,7 @@ class PageViewItem extends StatelessWidget {
       children: [
         SizedBox(
           width: double.infinity,
-          height: MediaQuery.of(context).size.height * 0.6,
+          height: MediaQuery.of(context).size.height * 0.5,
           child: Stack(
             children: [
               Positioned.fill(
@@ -53,7 +53,7 @@ class PageViewItem extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     child: Text(
                       'تخط',
-                      style: TextStyles.regular13(context).copyWith(
+                      style: TextStyles.bold19(context).copyWith(
                         color: const Color(0xFF949D9E),
                       ),
                     ),
