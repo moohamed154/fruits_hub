@@ -30,7 +30,7 @@ class LoginViewBody extends StatelessWidget {
               SizedBox(height: 16),
               CustomTextFormField(
                 hintText: 'كلمة المرور',
-                textInputType: TextInputType.emailAddress,
+                textInputType: TextInputType.visiblePassword,
                 suffixIcon: const Icon(
                   Icons.remove_red_eye,
                   color: Color(0xFFC9CECF),
