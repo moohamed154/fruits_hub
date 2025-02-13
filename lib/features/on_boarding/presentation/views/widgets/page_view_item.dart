@@ -44,6 +44,7 @@ class PageViewItem extends StatelessWidget {
               Visibility(
                 visible: isVisible,
                 child: InkWell(
+                  borderRadius: BorderRadius.circular(24),
                   onTap: () {
                     Prefs.setBool(kIsOnBoardinViewSeen, true);
                     Navigator.of(context)
@@ -53,7 +54,7 @@ class PageViewItem extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     child: Text(
                       'تخط',
-                      style: TextStyles.bold19(context).copyWith(
+                      style: TextStyles.bold16(context).copyWith(
                         color: const Color(0xFF949D9E),
                       ),
                     ),
@@ -77,7 +78,7 @@ class PageViewItem extends StatelessWidget {
           child: Text(
             subtitle,
             textAlign: TextAlign.center,
-            style: TextStyles.semiBold13(context).copyWith(
+            style: TextStyles.semiBold16(context).copyWith(
               color: const Color(0xFF4E5456),
             ),
           ),
