@@ -17,7 +17,7 @@ class DontHaveAnAccountWidet extends StatelessWidget {
           TextSpan(
             text: 'لا تمتلك حساب؟',
             style: TextStyles.semiBold16(context).copyWith(
-              color: AppColors.primaryColor,
+              color: Color(0xFF949D9E),
             ),
           ),
           TextSpan(
@@ -34,7 +34,7 @@ class DontHaveAnAccountWidet extends StatelessWidget {
               },
             text: 'قم بانشاء حساب',
             style: TextStyles.semiBold16(context).copyWith(
-              color: Color(0xFF949D9E),
+              color: AppColors.lightPrimaryColor,
             ),
           ),
         ],
