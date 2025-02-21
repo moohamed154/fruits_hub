@@ -7,7 +7,14 @@ AppBar buildAppBar({required BuildContext context, required String title}) {
     centerTitle: true,
     leading: IconButton(
       onPressed: () {
-        Navigator.pop(context);
+        if (Navigator.canPop(context)) {
+          Navigator.pop(context);
+        } else {
+          // Handle the case where there is no back navigation
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   SnackBar(content: Text('No previous page to navigate back to')),
+          // );
+        }
       },
       icon: Icon(Icons.arrow_back_ios_new),
     ),
