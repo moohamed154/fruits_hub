@@ -113,7 +113,6 @@ double getResponsiveFontSize(context, {required double fontSize}) {
 
 double getScaleFactor(context) {
   //* mediaQuery بديل
-  //* mediaQuery بديل
   // var dispatcher = PlatformDispatcher.instance;
   // var physicalWidth = dispatcher.views.first.physicalSize.width;
   // var devicePixelRatio = dispatcher.views.first.devicePixelRatio;
