@@ -2,9 +2,10 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruits_hub/core/errors/exceptions.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthService {
-  /// create user with email and password
+  //* create user with email and password
   Future<User> createUserWithEmAilAndPassword(
       {required String email, required String password}) async {
     try {
@@ -33,7 +34,7 @@ class FirebaseAuthService {
     }
   }
 
-  /// sign in with email and password
+  //* sign in with email and password
   Future<User> signInWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
@@ -61,5 +62,20 @@ class FirebaseAuthService {
       log('Exception in  FirebaseAuthService.signInWithEmailAndPassword: ${e.toString()}');
       throw CustomException(message: 'حدث خطأ غير متوقع الرجاء المحاولة لاحقا');
     }
+  }
+
+  //* sign in with google
+  Future<User> signInWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    return (await FirebaseAuth.instance.signInWithCredential(credential)).user!;
   }
 }
