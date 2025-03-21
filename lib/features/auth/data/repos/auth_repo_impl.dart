@@ -26,26 +26,33 @@ class AuthRepoImpl extends AuthRepo {
     try {
       user = await firebaseAuthService.createUserWithEmAilAndPassword(
           email: email, password: password);
-      var userEntity = UserModel.fromFirebaseUser(user);
+      var userEntity = UserEntity(
+        name: name,
+        email: email,
+        uId: user.uid,
+      );
       await addUserData(user: userEntity);
       return Right(
         userEntity,
       );
     } on CustomException catch (e) {
-      if (user != null) {
-        await firebaseAuthService.deleteUser();
-      }
+      await deleteUser(user);
       return Left(ServerFailure(e.message));
     } catch (e) {
-      if (user != null) {
-        await firebaseAuthService.deleteUser();
-      }
+      await deleteUser(user);
       log('Exception in AuthRepoImpl.createUserWithEmailAndPassword: ${e.toString()}');
       return Left(
         ServerFailure(
           'حدث خطأ غير متوقع الرجاء المحاولة لاحقا',
         ),
       );
+    }
+  }
+
+//** delete user method
+  Future<void> deleteUser(User? user) async {
+    if (user != null) {
+      await firebaseAuthService.deleteUser();
     }
   }
 
@@ -72,12 +79,18 @@ class AuthRepoImpl extends AuthRepo {
   //** sign in with google
   @override
   Future<Either<Failure, UserEntity>> signInWithGoogle() async {
+    User? user;
     try {
       var user = await firebaseAuthService.signInWithGoogle();
+      var userEntity = UserModel.fromFirebaseUser(user);
+      await addUserData(
+        user: userEntity,
+      );
       return Right(
-        UserModel.fromFirebaseUser(user),
+        userEntity,
       );
     } catch (e) {
+      await deleteUser(user);
       log('Exception in AuthRepoImpl.signInWithGoogle: ${e.toString()}');
       return Left(
         ServerFailure(
@@ -90,12 +103,17 @@ class AuthRepoImpl extends AuthRepo {
 //* sign in with facebook
   @override
   Future<Either<Failure, UserEntity>> signInWithFacebook() async {
+    User? user;
     try {
-      var user = await firebaseAuthService.signInWithFacebook();
-      return Right(
-        UserModel.fromFirebaseUser(user),
+      user = await firebaseAuthService.signInWithFacebook();
+
+      var userEntity = UserModel.fromFirebaseUser(user);
+      await addUserData(
+        user: userEntity,
       );
+      return Right(userEntity);
     } catch (e) {
+      await deleteUser(user);
       log('Exception in AuthRepoImpl.signInWithFacebook: ${e.toString()}');
       return Left(
         ServerFailure(
@@ -109,12 +127,16 @@ class AuthRepoImpl extends AuthRepo {
 
   @override
   Future<Either<Failure, UserEntity>> signInWithApple() async {
+    User? user;
     try {
-      var user = await firebaseAuthService.signInWithApple();
-      return Right(
-        UserModel.fromFirebaseUser(user),
+      user = await firebaseAuthService.signInWithApple();
+      var userEntity = UserModel.fromFirebaseUser(user);
+      await addUserData(
+        user: userEntity,
       );
+      return Right(userEntity);
     } catch (e) {
+      await deleteUser(user);
       log('Exception in AuthRepoImpl.signInWithApple: ${e.toString()}');
       return Left(
         ServerFailure(
