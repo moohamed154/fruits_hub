@@ -19,6 +19,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await Prefs.init();
+
   setupGetIt();
   runApp(const FruitHub());
 }
