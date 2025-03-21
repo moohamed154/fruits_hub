@@ -91,14 +91,14 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                   context.read<SigninCubit>().signinWithGoogle();
                 },
               ),
-              SizedBox(height: 16),
-              SocialLoginButton(
-                image: Assets.imagesApplIcon,
-                title: 'تسجيل بواسطة أبل',
-                onPressed: () {
-                  context.read<SigninCubit>().signinWithApple();
-                },
-              ),
+              // SizedBox(height: 16),
+              // SocialLoginButton(
+              //   image: Assets.imagesApplIcon,
+              //   title: 'تسجيل بواسطة أبل',
+              //   onPressed: () {
+              //     context.read<SigninCubit>().signinWithApple();
+              //   },
+              // ),
               SizedBox(height: 16),
               SocialLoginButton(
                 image: Assets.imagesFacebookIcon,
