@@ -63,7 +63,11 @@ class AuthRepoImpl extends AuthRepo {
     try {
       var user = await firebaseAuthService.signInWithEmailAndPassword(
           email: email, password: password);
-      return Right(UserModel.fromFirebaseUser(user));
+
+      var userEntity = await getUserData(uid: user.uid);
+      return Right(
+        userEntity,
+      );
     } on CustomException catch (e) {
       return Left(ServerFailure(e.message));
     } catch (e) {
@@ -83,9 +87,15 @@ class AuthRepoImpl extends AuthRepo {
     try {
       var user = await firebaseAuthService.signInWithGoogle();
       var userEntity = UserModel.fromFirebaseUser(user);
-      await addUserData(
-        user: userEntity,
+      var isUserExists = await databaseService.checkIfDataExists(
+        path: BackendEndpoints.isUserExist,
+        documentId: user.uid,
       );
+      if (isUserExists) {
+        await getUserData(uid: user.uid);
+      } else {
+        await addUserData(user: userEntity);
+      }
       return Right(
         userEntity,
       );
@@ -108,9 +118,15 @@ class AuthRepoImpl extends AuthRepo {
       user = await firebaseAuthService.signInWithFacebook();
 
       var userEntity = UserModel.fromFirebaseUser(user);
-      await addUserData(
-        user: userEntity,
+      var isUserExists = await databaseService.checkIfDataExists(
+        path: BackendEndpoints.isUserExist,
+        documentId: user.uid,
       );
+      if (isUserExists) {
+        await getUserData(uid: user.uid);
+      } else {
+        await addUserData(user: userEntity);
+      }
       return Right(userEntity);
     } catch (e) {
       await deleteUser(user);
@@ -131,9 +147,15 @@ class AuthRepoImpl extends AuthRepo {
     try {
       user = await firebaseAuthService.signInWithApple();
       var userEntity = UserModel.fromFirebaseUser(user);
-      await addUserData(
-        user: userEntity,
+      var isUserExists = await databaseService.checkIfDataExists(
+        path: BackendEndpoints.isUserExist,
+        documentId: user.uid,
       );
+      if (isUserExists) {
+        await getUserData(uid: user.uid);
+      } else {
+        await addUserData(user: userEntity);
+      }
       return Right(userEntity);
     } catch (e) {
       await deleteUser(user);
@@ -151,6 +173,16 @@ class AuthRepoImpl extends AuthRepo {
     await databaseService.addData(
       data: user.toMap(),
       path: BackendEndpoints.adduserData,
+      documentId: user.uId,
     );
+  }
+
+  @override
+  Future<UserEntity> getUserData({required String uid}) async {
+    var userData = await databaseService.getData(
+      path: BackendEndpoints.getUserData,
+      documentId: uid,
+    );
+    return UserModel.fromJson(userData);
   }
 }

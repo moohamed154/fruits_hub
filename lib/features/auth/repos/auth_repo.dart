@@ -27,4 +27,7 @@ abstract class AuthRepo {
 
 //* add user data to firestore
   Future addUserData({required UserEntity user});
+
+  //** get user data
+  Future<UserEntity> getUserData({required String uid});
 }
