@@ -170,4 +170,17 @@ class FirebaseAuthService {
     return (await FirebaseAuth.instance.signInWithCredential(oauthCredential))
         .user!;
   }
+
+  //*delete user acount
+  Future deleteUser() async {
+    try {
+      await FirebaseAuth.instance.currentUser!.delete();
+    } on FirebaseAuthException catch (e) {
+      log('Exception in  FirebaseAuthService.deleteUser: ${e.toString()}');
+      throw CustomException(message: 'حدث خطأ غير متوقع الرجاء المحاولة لاحقا');
+    } catch (e) {
+      log('Exception in  FirebaseAuthService.deleteUser: ${e.toString()}');
+      throw CustomException(message: 'حدث خطأ غير متوقع الرجاء المحاولة لاحقا');
+    }
+  }
 }

@@ -24,4 +24,7 @@ abstract class AuthRepo {
 
 //* sign in with apple
   Future<Either<Failure, UserEntity>> signInWithApple();
+
+//* add user data to firestore
+  Future addUserData({required UserEntity user});
 }

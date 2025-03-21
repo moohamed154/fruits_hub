@@ -1,29 +1,45 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruits_hub/core/errors/exceptions.dart';
 import 'package:fruits_hub/core/errors/failure.dart';
+import 'package:fruits_hub/core/services/database_service.dart';
 import 'package:fruits_hub/core/services/firebase_auth_service.dart';
+import 'package:fruits_hub/core/utils/backend_endpoints.dart';
 import 'package:fruits_hub/features/auth/data/models/user_model.dart';
 import 'package:fruits_hub/features/auth/repos/auth_repo.dart';
 import 'package:fruits_hub/features/auth/entities/user_entity.dart';
 
 class AuthRepoImpl extends AuthRepo {
   final FirebaseAuthService firebaseAuthService;
+  final DatabaseService databaseService;
 
-  AuthRepoImpl({required this.firebaseAuthService});
+  AuthRepoImpl(
+      {required this.databaseService, required this.firebaseAuthService});
 
   //** create user with email and password
   @override
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
       String email, String password, String name) async {
+    User? user;
     try {
-      var user = await firebaseAuthService.createUserWithEmAilAndPassword(
+      user = await firebaseAuthService.createUserWithEmAilAndPassword(
           email: email, password: password);
-      return Right(UserModel.fromFirebaseUser(user));
+      var userEntity = UserModel.fromFirebaseUser(user);
+      await addUserData(user: userEntity);
+      return Right(
+        userEntity,
+      );
     } on CustomException catch (e) {
+      if (user != null) {
+        await firebaseAuthService.deleteUser();
+      }
       return Left(ServerFailure(e.message));
     } catch (e) {
+      if (user != null) {
+        await firebaseAuthService.deleteUser();
+      }
       log('Exception in AuthRepoImpl.createUserWithEmailAndPassword: ${e.toString()}');
       return Left(
         ServerFailure(
@@ -106,5 +122,13 @@ class AuthRepoImpl extends AuthRepo {
         ),
       );
     }
+  }
+
+  @override
+  Future addUserData({required UserEntity user}) async {
+    await databaseService.addData(
+      data: user.toMap(),
+      path: BackendEndpoints.adduserData,
+    );
   }
 }
