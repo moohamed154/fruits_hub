@@ -24,6 +24,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: kHorizontalPadding),
         child: Form(

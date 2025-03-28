@@ -33,6 +33,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
         horizontal: kHorizontalPadding,
       ),
       child: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Form(
           key: formKey,
           autovalidateMode: autoValidateMode,
