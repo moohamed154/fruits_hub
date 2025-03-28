@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:fruits_hub/core/utils/app_images.dart';
+import 'package:fruits_hub/features/home/domain/entities/bottom_navigation_bar_entity.dart';
+import 'package:fruits_hub/features/home/presentation/views/widgets/navigation_bar_item.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({super.key});
@@ -28,38 +28,13 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ],
       ),
       child: Row(
-        children: [],
+        children: bottomNavigationBarItems.map((e) {
+          return NvigationBarItem(
+            bottomNavigationBarEntity: e,
+            isSelected: false,
+          );
+        }).toList(),
       ),
     );
-  }
-}
-
-class InActiveItem extends StatelessWidget {
-  const InActiveItem({super.key, required this.image});
-  final String image;
-  @override
-  Widget build(BuildContext context) {
-    return SvgPicture.asset(image);
-  }
-}
-
-class NvigationBarItem extends StatelessWidget {
-  const NvigationBarItem({super.key, required this.isSelected});
-  final bool isSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return isSelected
-        ? ActiveItem()
-        : InActiveItem(image: Assets.imagesVuesaxOutlineHome);
-  }
-}
-
-class ActiveItem extends StatelessWidget {
-  const ActiveItem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
