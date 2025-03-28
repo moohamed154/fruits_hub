@@ -14,7 +14,10 @@ class NvigationBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isSelected
-        ? ActiveItem()
+        ? ActiveItem(
+            image: bottomNavigationBarEntity.activeImage,
+            text: bottomNavigationBarEntity.name,
+          )
         : InActiveItem(
             image: bottomNavigationBarEntity.inActiveImage,
           );
