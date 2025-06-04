@@ -72,6 +72,13 @@ abstract class TextStyles {
     );
   }
 
+  static TextStyle semiBold19(context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 19),
+      fontWeight: FontWeight.w600,
+    );
+  }
+
   static TextStyle regular22(context) {
     return TextStyle(
       fontSize: getResponsiveFontSize(context, fontSize: 22),
