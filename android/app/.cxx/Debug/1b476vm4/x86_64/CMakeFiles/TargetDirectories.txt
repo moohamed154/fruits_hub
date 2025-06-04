@@ -1,0 +1,2 @@
+C:/Users/mooha/Desktop/fruits hub/android/app/.cxx/Debug/1b476vm4/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/mooha/Desktop/fruits hub/android/app/.cxx/Debug/1b476vm4/x86_64/CMakeFiles/rebuild_cache.dir
