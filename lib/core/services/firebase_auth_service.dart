@@ -183,4 +183,8 @@ class FirebaseAuthService {
       throw CustomException(message: 'حدث خطأ غير متوقع الرجاء المحاولة لاحقا');
     }
   }
+
+  bool isLoggedIn() {
+    return FirebaseAuth.instance.currentUser != null;
+  }
 }
