@@ -1,16 +1,34 @@
-# fruits_hub
+# Fruits Hub
 
-A new Flutter project.
+A full e-commerce fruit-store app backed by Firebase.
+
+Sign in with email, Google, Facebook or Apple, browse products with an
+onboarding flow, and shop with a cart - all data synced through Cloud
+Firestore, with Arabic/English localization.
+
+## Features
+
+- Authentication: email, Google, Facebook and Apple sign-in
+- Product browsing with onboarding
+- Localized (Arabic / English)
+- Cloud-synced data with Firestore
+
+## Tech Stack
+
+Flutter - Dart - BLoC/Cubit (flutter_bloc) - Firebase (Auth, Cloud
+Firestore) - get_it - dartz - shared_preferences - flutter_localizations
+
+## Screenshots
+
+<!-- Add 2-3 screenshots here, e.g.:
+| Onboarding | Home | Cart |
+|---|---|---|
+| ![](screenshots/onboarding.png) | ![](screenshots/home.png) | ![](screenshots/cart.png) |
+-->
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+flutter pub get
+flutter run
+```
